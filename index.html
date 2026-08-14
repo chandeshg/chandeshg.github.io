@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chandesh | Cybersecurity Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#071116;
+    --bg-2:#0b1920;
+    --panel:rgba(11,22,29,0.88);
+    --panel-2:rgba(18,31,39,0.96);
+    --line:rgba(130,170,183,0.18);
+    --line-strong:rgba(130,170,183,0.3);
+    --text:#e7f2f6;
+    --muted:#8da2ad;
+    --mint:#63e6c9;
+    --sky:#7cc7ff;
+    --amber:#f0b35e;
+    --red:#ff716a;
+    --shadow:0 24px 80px rgba(0,0,0,0.38);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    min-height:100vh;
+    color:var(--text);
+    font-family:'Space Grotesk',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+    background:
+      radial-gradient(circle at top left, rgba(99,230,201,0.14), transparent 28%),
+      radial-gradient(circle at top right, rgba(124,199,255,0.14), transparent 22%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 55%, #051015 100%);
+  }
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size:72px 72px;
+    mask-image:radial-gradient(circle at center, rgba(0,0,0,0.65), transparent 85%);
+    pointer-events:none;
+    opacity:0.25;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);letter-spacing:2.6px;text-transform:uppercase;margin-bottom:14px;}
+  .section-head{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:22px;flex-wrap:wrap;}
+  .section-note{font-family:'IBM Plex Mono',monospace;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1.6px;}
+  h2{font-size:clamp(1.5rem,2vw,2.3rem);font-weight:600;margin-bottom:14px;letter-spacing:-0.03em;}
+  p.lead{color:var(--muted);max-width:680px;font-size:15px;}
+
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(7,17,22,0.72);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(130,170,183,0.12);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
+  .brand{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:14px;letter-spacing:0.4px;display:flex;align-items:center;gap:10px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint);animation:pulse 2.2s infinite;}
+  .navlinks{display:flex;gap:28px;font-size:13px;font-family:'IBM Plex Mono',monospace;color:var(--muted);}
+  .navlinks a:hover{color:var(--mint);}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+  header.hero{padding:84px 0 56px;position:relative;overflow:hidden;}
+  .hero-shell{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,0.9fr);gap:28px;align-items:center;}
+  .hero-copy{padding:8px 0;}
+  h1{font-size:clamp(2.6rem,6vw,5.2rem);line-height:0.95;letter-spacing:-0.06em;margin-bottom:18px;max-width:10ch;}
+  h1 span{color:var(--mint);}
+  .role{color:var(--muted);font-size:18px;max-width:54ch;margin-bottom:20px;}
+  .summary{color:var(--text);max-width:60ch;font-size:16px;margin-bottom:28px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
+  .cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 18px;border-radius:999px;border:1px solid var(--line-strong);font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease;}
+  .cta:hover{transform:translateY(-1px);}
+  .cta.primary{background:linear-gradient(135deg, rgba(99,230,201,0.95), rgba(124,199,255,0.9));color:#041013;border-color:transparent;}
+  .cta.secondary:hover{border-color:var(--mint);color:var(--mint);}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:12px;}
+  .pill{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);background:rgba(10,20,27,0.7);border:1px solid var(--line);border-radius:999px;padding:8px 12px;}
+
+  .terminal{background:linear-gradient(180deg, rgba(18,31,39,0.95), rgba(9,18,24,0.92));border:1px solid rgba(130,170,183,0.18);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);}
+  .term-bar{display:flex;gap:8px;padding:14px 16px;background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(130,170,183,0.12);}
+  .term-bar span{width:11px;height:11px;border-radius:50%;background:#2d3c46;}
+  .term-body{padding:24px;font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  .term-body .line{margin-bottom:8px;color:var(--muted);}
+  .term-body .prompt{color:var(--mint);}
+  .term-body .out{color:var(--text);}
+  .term-panel{margin-top:16px;padding:16px;border-radius:14px;border:1px solid rgba(130,170,183,0.12);background:rgba(255,255,255,0.03);}
+  .term-panel strong{display:block;margin-bottom:6px;color:var(--sky);font-size:12px;text-transform:uppercase;letter-spacing:1.6px;}
+  .term-panel p{color:var(--muted);font-size:13px;}
+  .cursor{display:inline-block;width:8px;height:16px;background:var(--mint);animation:blink 1s steps(1) infinite;vertical-align:middle;}
+  @keyframes blink{50%{opacity:0;}}
+
+  section{padding:56px 0;border-top:1px solid rgba(130,170,183,0.12);}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:28px;}
+  .stat{padding:18px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,0.03);}
+  .stat .num{font-size:28px;font-weight:700;letter-spacing:-0.04em;color:var(--text);}
+  .stat .label{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-top:6px;}
+
+  .skillgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:24px;}
+  .skillcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 10px 28px rgba(0,0,0,0.16);}
+  .skillcard h3{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--mint);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;}
+  .skillcard p{color:var(--muted);font-size:14px;margin-bottom:14px;}
+  .skillcard ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;}
+  .skillcard li{font-size:13px;background:var(--panel-2);border:1px solid var(--line);border-radius:4px;padding:4px 10px;color:var(--text);}
+
+  .feed{margin-top:24px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel);box-shadow:0 16px 40px rgba(0,0,0,0.18);}
+  .feed-head{display:grid;grid-template-columns:120px 110px 1fr 100px;gap:10px;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--line);background:var(--panel-2);}
+  .feed-row{display:grid;grid-template-columns:120px 110px 1fr 100px;gap:10px;padding:18px;border-bottom:1px solid var(--line);align-items:start;}
+  .feed-row:last-child{border-bottom:none;}
+  .feed-row:hover{background:rgba(255,255,255,0.025);}
+  .sev{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;height:fit-content;}
+  .sev.high{color:var(--red);background:rgba(255,113,106,0.12);}
+  .sev.med{color:var(--amber);background:rgba(240,179,94,0.12);}
+  .sev.info{color:var(--mint);background:rgba(99,230,201,0.12);}
+  .feed-row .id{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);}
+  .feed-row .desc{font-size:13.5px;}
+  .feed-row .desc .title{font-weight:600;display:block;margin-bottom:3px;}
+  .feed-row .desc .sub{color:var(--muted);font-size:12.5px;}
+  .feed-row .link a{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mint);}
+
+  .timeline{display:grid;gap:14px;margin-top:24px;}
+  .step{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:18px;border-radius:18px;border:1px solid var(--line);background:var(--panel);}
+  .step .when{font-family:'IBM Plex Mono',monospace;color:var(--mint);font-size:12px;text-transform:uppercase;letter-spacing:1.4px;}
+  .step h3{font-size:18px;margin-bottom:6px;}
+  .step p{color:var(--muted);font-size:14px;}
+
+  .certrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;}
+  .cert{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:12px 16px;font-size:13.5px;}
+  .cert .status{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+  .status.done{background:var(--mint);}
+  .status.progress{background:var(--amber);}
+  .cert .name{font-weight:500;}
+  .cert .meta{color:var(--muted);font-size:12px;margin-left:4px;}
+
+  .contactgrid{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px;}
+  .cbtn{font-family:'IBM Plex Mono',monospace;font-size:13px;padding:12px 20px;border-radius:6px;border:1px solid var(--line);display:flex;align-items:center;gap:8px;}
+  .cbtn.primary{background:linear-gradient(135deg, var(--mint), var(--sky));color:#061013;border-color:transparent;font-weight:700;}
+  .cbtn:not(.primary):hover{border-color:var(--mint);color:var(--mint);}
+
+  footer{padding:34px 0 42px;text-align:center;color:var(--muted);font-size:12px;font-family:'IBM Plex Mono',monospace;}
+
+  @media (max-width:900px){
+    .hero-shell{grid-template-columns:1fr;}
+    .step{grid-template-columns:1fr;gap:8px;}
+  }
+  @media (max-width:640px){
+    nav .wrap{padding:14px 18px;}
+    .wrap{padding:0 18px;}
+    header.hero{padding-top:56px;}
+    .role{font-size:16px;}
+    .summary{font-size:15px;}
+    .navlinks{display:none;}
+    .feed-head{display:none;}
+    .feed-row{grid-template-columns:1fr;gap:6px;}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>chandesh<span style="color:var(--muted)">/cybersecurity</span></div>
+    <div class="navlinks">
+      <a href="#about">about</a>
+      <a href="#contact">contact</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#roadmap">roadmap</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-shell">
+      <div class="hero-copy">
+        <div class="eyebrow">Cybersecurity Portfolio</div>
+        <h1>Building a future in <span>defense</span> and threat hunting.</h1>
+        <p class="role">Chandesh | aspiring SOC analyst, bug bounty learner, and computer security student.</p>
+        <p class="summary">This site is a clean starting point for my cybersecurity career. I am learning the fundamentals, documenting projects, and showing the skills I am building for SOC, blue-team, and vulnerability research roles.</p>
+        <div class="cta-row">
+          <a class="cta primary" href="#contact">Contact me</a>
+          <a class="cta secondary" href="#projects">View work</a>
+        </div>
+        <div class="hero-meta">
+          <span class="pill">SOC fundamentals</span>
+          <span class="pill">Bug bounty practice</span>
+          <span class="pill">Linux and networking</span>
+          <span class="pill">Python scripting</span>
+        </div>
+      </div>
+
+      <div class="terminal">
+        <div class="term-bar"><span></span><span></span><span></span></div>
+        <div class="term-body">
+          <div class="line"><span class="prompt">visitor@portfolio:~$</span> <span class="out">whoami</span></div>
+          <div class="line out">Chandesh</div>
+          <div class="line"><span class="prompt">visitor@portfolio:~$</span> <span class="out">cat focus.txt</span></div>
+          <div class="line out">SOC Analyst path, blue-team skills, and practical security projects<span class="cursor"></span></div>
+          <div class="term-panel">
+            <strong>Current goal</strong>
+            <p>Turn learning into proof: write-ups, labs, alerts, and simple tools that show real progress.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">About</div>
+        <h2>About me</h2>
+      </div>
+      <div class="section-note">background and goals</div>
+    </div>
+    <p class="lead">I am Chandesh Gunawardena. I completed my graduate BSc in Computer Security from Plymouth University, UK via NSBM Green University in Sri Lanka.</p>
+    <p class="lead" style="margin-top:14px;">I am currently learning the path to become a SOC Analyst.</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="num">BSc</div>
+        <div class="label">Computer Security</div>
+      </div>
+      <div class="stat">
+        <div class="num">UK</div>
+        <div class="label">Plymouth University</div>
+      </div>
+      <div class="stat">
+        <div class="num">SOC</div>
+        <div class="label">analyst path</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Get in touch</div>
+        <h2>Contact</h2>
+      </div>
+      <div class="section-note">open to entry-level roles</div>
+    </div>
+    <p class="lead">I am open to SOC Analyst L1, Associate, and Trainee roles, as well as internships and mentorship opportunities.</p>
+    <div class="contactgrid">
+      <a class="cbtn primary" href="mailto:chandeshgunawardena@gmail.com">Email me</a>
+      <a class="cbtn" href="https://www.linkedin.com/in/chandesh-gunawardena-505520255/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a class="cbtn" href="https://github.com/chandeshg" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Capabilities</div>
+        <h2>Technical skills</h2>
+      </div>
+      <div class="section-note">what I bring to the table</div>
+    </div>
+    <div class="skillgrid">
+      <div class="skillcard">
+        <h3>Security & QA</h3>
+        <p>Core security knowledge and quality assurance practices for testing and reporting issues.</p>
+        <ul>
+          <li>Cyber Security</li><li>Security Testing Fundamentals</li><li>Software Tester</li><li>Defect Tracking & Bug Reporting</li><li>Bug Bounty Hunting (HackerOne)</li>
+        </ul>
+      </div>
+      <div class="skillcard">
+        <h3>Application Testing</h3>
+        <p>Hands-on testing experience across web technologies and healthcare billing systems.</p>
+        <ul>
+          <li>Website testing (HTML/Java/CSS)</li><li>EHR/Billing Systems Testing</li><li>Microsoft Excel (test documentation)</li><li>openpyxl automation</li>
+        </ul>
+      </div>
+      <div class="skillcard">
+        <h3>Penetration Testing Tools</h3>
+        <p>Offensive security tooling for recon, vulnerability scanning, and web application testing.</p>
+        <ul>
+          <li>Burp Suite</li><li>Nuclei</li><li>FFUF</li><li>Subfinder</li><li>HTTPX</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Field Notes</div>
+        <h2>Bug bounty and lab write-ups</h2>
+      </div>
+      <div class="section-note">replace with your real work</div>
+    </div>
+    <p class="lead">This section works well for HackerOne reports, CTF write-ups, and SOC labs. It keeps the content readable while still looking technical.</p>
+    <div class="feed">
+      <div class="feed-head"><div>Severity</div><div>ID</div><div>Report</div><div>Link</div></div>
+      <div class="feed-row">
+        <span class="sev med">MEDIUM</span>
+        <span class="id">RPT-001</span>
+        <div class="desc"><span class="title">Subdomain recon led to an exposed staging endpoint</span><span class="sub">HackerOne style workflow using subfinder, httpx, and manual validation</span></div>
+        <span class="link"><a href="#">view →</a></span>
+      </div>
+      <div class="feed-row">
+        <span class="sev info">WRITE-UP</span>
+        <span class="id">LAB-014</span>
+        <div class="desc"><span class="title">SOC Level 1: triaging a phishing alert in a SIEM</span><span class="sub">LetsDefend or TryHackMe style lab notes</span></div>
+        <span class="link"><a href="#">view →</a></span>
+      </div>
+      <div class="feed-row">
+        <span class="sev high">CTF</span>
+        <span class="id">PICO-22</span>
+        <div class="desc"><span class="title">picoCTF forensic log analysis challenge</span><span class="sub">Write-up with methodology and lessons learned</span></div>
+        <span class="link"><a href="#">view →</a></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Roadmap</div>
+        <h2>What I am working on next</h2>
+      </div>
+      <div class="section-note">career growth plan</div>
+    </div>
+    <p class="lead">A simple roadmap helps this portfolio feel active. It also shows that I am serious about progressing from beginner to job-ready.</p>
+    <div class="timeline">
+      <div class="step">
+        <div class="when">Now</div>
+        <div>
+          <h3>Build a small project library</h3>
+          <p>Turn labs, CTFs, and bug bounty practice into short write-ups that explain the problem, the approach, and the lesson.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="when">Next</div>
+        <div>
+          <h3>Strengthen SOC fundamentals</h3>
+          <p>Practice alert triage, Windows event analysis, Linux logging, basic incident response, and SIEM thinking.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="when">Soon</div>
+        <div>
+          <h3>Publish a simple GitHub profile</h3>
+          <p>Link this site to your GitHub, add project repositories, and use the portfolio as a central professional landing page.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Credentials</div>
+        <h2>Certifications and badges</h2>
+      </div>
+      <div class="section-note">update as you progress</div>
+    </div>
+    <p class="lead">Use this area to show ongoing learning. Mark items as in progress now and update them when they are complete.</p>
+    <div class="certrow">
+      <div class="cert"><span class="status progress"></span><span class="name">Cisco Intro to Cybersecurity</span><span class="meta">in progress</span></div>
+      <div class="cert"><span class="status progress"></span><span class="name">IBM SkillsBuild - Security Ops</span><span class="meta">in progress</span></div>
+      <div class="cert"><span class="status progress"></span><span class="name">TryHackMe SOC Level 1</span><span class="meta">in progress</span></div>
+      <div class="cert"><span class="status done"></span><span class="name">BSc Computer Security</span><span class="meta">Plymouth / NSBM</span></div>
+    </div>
+  </div>
+</section>
+
+
+<footer>built for a cybersecurity career path</footer>
+
+</body>
+</html>
