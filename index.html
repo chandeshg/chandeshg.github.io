@@ -1,0 +1,3201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chandesh | Cybersecurity Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Devicon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+<style>
+
+:root{
+  --bg:#071116;
+  --bg-2:#0b1920;
+  --panel:rgba(11,22,29,0.88);
+  --panel-2:rgba(18,31,39,0.96);
+
+  --line:rgba(130,170,183,0.18);
+  --line-strong:rgba(130,170,183,0.3);
+
+  --text:#e7f2f6;
+  --muted:#8da2ad;
+
+  --mint:#63e6c9;
+  --sky:#7cc7ff;
+  --amber:#f0b35e;
+  --red:#ff716a;
+
+  --shadow:0 24px 80px rgba(0,0,0,0.38);
+}
+
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+
+  color:var(--text);
+
+  font-family:'Space Grotesk',sans-serif;
+
+  line-height:1.6;
+
+  overflow-x:hidden;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(99,230,201,0.14),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(124,199,255,0.14),
+      transparent 22%
+    ),
+    linear-gradient(
+      180deg,
+      var(--bg) 0%,
+      var(--bg-2) 55%,
+      #051015 100%
+    );
+}
+
+
+/* Background grid */
+
+body::before{
+  content:'';
+
+  position:fixed;
+
+  inset:0;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px
+    );
+
+  background-size:72px 72px;
+
+  mask-image:
+    radial-gradient(
+      circle at center,
+      rgba(0,0,0,0.7),
+      transparent 85%
+    );
+
+  pointer-events:none;
+
+  opacity:.25;
+
+  z-index:-3;
+}
+
+
+/* Animated network canvas */
+
+#cyber-bg{
+  position:fixed;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  pointer-events:none;
+
+  z-index:-2;
+
+  opacity:.42;
+}
+
+
+/* Scan line */
+
+.scan-line{
+  position:fixed;
+
+  left:0;
+
+  top:-5%;
+
+  width:100%;
+
+  height:1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(99,230,201,0),
+      rgba(99,230,201,.5),
+      rgba(124,199,255,0),
+      transparent
+    );
+
+  box-shadow:
+    0 0 14px rgba(99,230,201,.25);
+
+  pointer-events:none;
+
+  z-index:40;
+
+  opacity:.35;
+
+  animation:
+    scan 9s linear infinite;
+}
+
+@keyframes scan{
+
+  0%{
+    top:-5%;
+  }
+
+  100%{
+    top:105%;
+  }
+
+}
+
+
+a{
+  color:inherit;
+
+  text-decoration:none;
+}
+
+.wrap{
+  max-width:1120px;
+
+  margin:0 auto;
+
+  padding:0 24px;
+}
+
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:12px;
+
+  color:var(--amber);
+
+  letter-spacing:2.6px;
+
+  text-transform:uppercase;
+
+  margin-bottom:14px;
+}
+
+.section-head{
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:18px;
+
+  align-items:end;
+
+  margin-bottom:22px;
+
+  flex-wrap:wrap;
+}
+
+.section-note{
+  font-family:'IBM Plex Mono',monospace;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.6px;
+}
+
+h2{
+  font-size:clamp(1.5rem,2vw,2.3rem);
+
+  font-weight:600;
+
+  margin-bottom:14px;
+
+  letter-spacing:-.03em;
+}
+
+p.lead{
+  color:var(--muted);
+
+  max-width:720px;
+
+  font-size:15px;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav{
+  position:sticky;
+
+  top:0;
+
+  z-index:50;
+
+  background:
+    rgba(7,17,22,.72);
+
+  backdrop-filter:blur(14px);
+
+  border-bottom:
+    1px solid rgba(130,170,183,.12);
+}
+
+nav .wrap{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:16px 24px;
+}
+
+.brand{
+  font-family:'IBM Plex Mono',monospace;
+
+  font-weight:700;
+
+  font-size:14px;
+
+  letter-spacing:.4px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.brand .dot{
+  width:9px;
+
+  height:9px;
+
+  border-radius:50%;
+
+  background:var(--mint);
+
+  box-shadow:
+    0 0 12px var(--mint);
+
+  animation:pulse 2.2s infinite;
+}
+
+@keyframes pulse{
+
+  0%,100%{
+    opacity:1;
+  }
+
+  50%{
+    opacity:.4;
+  }
+
+}
+
+.navlinks{
+  display:flex;
+
+  gap:28px;
+
+  font-size:13px;
+
+  font-family:'IBM Plex Mono',monospace;
+
+  color:var(--muted);
+}
+
+.navlinks a{
+  transition:
+    color .2s ease;
+}
+
+.navlinks a:hover{
+  color:var(--mint);
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+header.hero{
+  padding:84px 0 56px;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.hero-shell{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1.3fr)
+    minmax(300px,.9fr);
+
+  gap:28px;
+
+  align-items:center;
+}
+
+.hero-copy{
+  padding:8px 0;
+}
+
+h1{
+  font-size:
+    clamp(2.6rem,6vw,5.2rem);
+
+  line-height:.95;
+
+  letter-spacing:-.06em;
+
+  margin-bottom:18px;
+
+  max-width:10ch;
+}
+
+h1 span{
+  color:var(--mint);
+
+  text-shadow:
+    0 0 30px rgba(99,230,201,.15);
+}
+
+.role{
+  color:var(--muted);
+
+  font-size:18px;
+
+  max-width:54ch;
+
+  margin-bottom:20px;
+}
+
+.summary{
+  color:var(--text);
+
+  max-width:60ch;
+
+  font-size:16px;
+
+  margin-bottom:28px;
+}
+
+.cta-row{
+  display:flex;
+
+  gap:14px;
+
+  flex-wrap:wrap;
+
+  margin-bottom:26px;
+}
+
+.cta{
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  padding:13px 18px;
+
+  border-radius:999px;
+
+  border:
+    1px solid var(--line-strong);
+
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:13px;
+
+  font-weight:600;
+
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    box-shadow .2s ease;
+}
+
+.cta:hover{
+  transform:translateY(-2px);
+}
+
+.cta.primary{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(99,230,201,.95),
+      rgba(124,199,255,.9)
+    );
+
+  color:#041013;
+
+  border-color:transparent;
+
+  box-shadow:
+    0 8px 30px rgba(99,230,201,.12);
+}
+
+.cta.secondary:hover{
+  border-color:var(--mint);
+
+  color:var(--mint);
+}
+
+.hero-meta{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:12px;
+}
+
+.pill{
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  background:
+    rgba(10,20,27,.7);
+
+  border:
+    1px solid var(--line);
+
+  border-radius:999px;
+
+  padding:8px 12px;
+}
+
+
+/* =========================
+   TERMINAL
+========================= */
+
+.terminal{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18,31,39,.95),
+      rgba(9,18,24,.92)
+    );
+
+  border:
+    1px solid rgba(130,170,183,.18);
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  box-shadow:var(--shadow);
+
+  position:relative;
+}
+
+.terminal::after{
+  content:'';
+
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(99,230,201,.025),
+      transparent
+    );
+
+  animation:
+    terminalGlow 4s ease-in-out infinite;
+}
+
+@keyframes terminalGlow{
+
+  0%,100%{
+    opacity:.3;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+.term-bar{
+  display:flex;
+
+  gap:8px;
+
+  padding:14px 16px;
+
+  background:
+    rgba(255,255,255,.04);
+
+  border-bottom:
+    1px solid rgba(130,170,183,.12);
+}
+
+.term-bar span{
+  width:11px;
+
+  height:11px;
+
+  border-radius:50%;
+
+  background:#2d3c46;
+}
+
+.term-body{
+  padding:24px;
+
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:13px;
+
+  min-height:330px;
+}
+
+.term-line{
+  margin-bottom:8px;
+
+  color:var(--muted);
+
+  min-height:20px;
+}
+
+.term-prompt{
+  color:var(--mint);
+}
+
+.term-output{
+  color:var(--text);
+
+  margin-bottom:12px;
+}
+
+.term-panel{
+  margin-top:18px;
+
+  padding:16px;
+
+  border-radius:14px;
+
+  border:
+    1px solid rgba(130,170,183,.12);
+
+  background:
+    rgba(255,255,255,.03);
+}
+
+.term-panel strong{
+  display:block;
+
+  margin-bottom:6px;
+
+  color:var(--sky);
+
+  font-size:12px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.6px;
+}
+
+.term-panel p{
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+.cursor{
+  display:inline-block;
+
+  width:8px;
+
+  height:16px;
+
+  margin-left:2px;
+
+  background:var(--mint);
+
+  vertical-align:middle;
+
+  animation:
+    blink 1s steps(1) infinite;
+}
+
+@keyframes blink{
+
+  50%{
+    opacity:0;
+  }
+
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+  padding:56px 0;
+
+  border-top:
+    1px solid rgba(130,170,183,.12);
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-grid{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1.5fr)
+    minmax(280px,.8fr);
+
+  gap:28px;
+
+  align-items:start;
+}
+
+.about-main{
+  max-width:720px;
+}
+
+.about-side{
+  display:grid;
+
+  gap:12px;
+}
+
+.about-card{
+  padding:18px;
+
+  border-radius:16px;
+
+  border:
+    1px solid var(--line);
+
+  background:var(--panel);
+
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+.about-card:hover{
+  transform:translateY(-3px);
+
+  border-color:
+    rgba(99,230,201,.35);
+
+  box-shadow:
+    0 0 25px rgba(99,230,201,.06);
+}
+
+.about-label{
+  display:block;
+
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:10px;
+
+  color:var(--amber);
+
+  text-transform:uppercase;
+
+  letter-spacing:1.5px;
+
+  margin-bottom:6px;
+}
+
+.about-card strong{
+  display:block;
+
+  font-size:15px;
+
+  margin-bottom:3px;
+}
+
+.about-card span:last-child{
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(160px,1fr)
+    );
+
+  gap:14px;
+
+  margin-top:28px;
+}
+
+.stat{
+  padding:18px;
+
+  border-radius:18px;
+
+  border:
+    1px solid var(--line);
+
+  background:
+    rgba(255,255,255,.03);
+
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+.stat:hover{
+  transform:translateY(-3px);
+
+  border-color:
+    rgba(99,230,201,.35);
+
+  box-shadow:
+    0 0 25px rgba(99,230,201,.06);
+}
+
+.stat .num{
+  font-size:28px;
+
+  font-weight:700;
+
+  letter-spacing:-.04em;
+
+  color:var(--text);
+}
+
+.stat .label{
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  text-transform:uppercase;
+
+  letter-spacing:1.2px;
+
+  margin-top:6px;
+}
+
+
+/* =========================
+   SKILLS
+========================= */
+
+.skillgrid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(230px,1fr)
+    );
+
+  gap:16px;
+
+  margin-top:24px;
+}
+
+.skillcard{
+  background:var(--panel);
+
+  border:
+    1px solid var(--line);
+
+  border-radius:18px;
+
+  padding:22px;
+
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.16);
+
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+.skillcard:hover{
+  transform:translateY(-4px);
+
+  border-color:
+    rgba(99,230,201,.35);
+
+  box-shadow:
+    0 0 30px rgba(99,230,201,.07);
+}
+
+.skillcard h3{
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:13px;
+
+  color:var(--mint);
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+
+  margin-bottom:12px;
+}
+
+.skillcard p{
+  color:var(--muted);
+
+  font-size:14px;
+
+  margin-bottom:14px;
+}
+
+.skill-list{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+}
+
+.skill-item{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  font-size:13px;
+
+  background:var(--panel-2);
+
+  border:
+    1px solid var(--line);
+
+  border-radius:6px;
+
+  padding:6px 10px;
+
+  color:var(--text);
+
+  transition:
+    all .2s ease;
+}
+
+.skill-item:hover{
+  border-color:var(--mint);
+
+  color:var(--mint);
+
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 0 15px rgba(99,230,201,.06);
+}
+
+.skill-item i{
+  font-size:17px;
+
+  color:var(--mint);
+}
+
+.skill-icon{
+  font-size:15px;
+}
+
+
+/* =========================
+   PROJECTS
+========================= */
+
+.feed{
+  margin-top:24px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  background:var(--panel);
+
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.18);
+
+  transition:
+    border-color .25s ease;
+}
+
+.feed:hover{
+  border-color:
+    rgba(99,230,201,.28);
+}
+
+.feed-head{
+  display:grid;
+
+  grid-template-columns:
+    120px 110px 1fr 100px;
+
+  gap:10px;
+
+  padding:12px 18px;
+
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:11px;
+
+  color:var(--muted);
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+
+  border-bottom:
+    1px solid var(--line);
+
+  background:var(--panel-2);
+}
+
+.feed-row{
+  display:grid;
+
+  grid-template-columns:
+    120px 110px 1fr 100px;
+
+  gap:10px;
+
+  padding:18px;
+
+  border-bottom:
+    1px solid var(--line);
+
+  align-items:start;
+}
+
+.feed-row:last-child{
+  border-bottom:none;
+}
+
+.feed-row:hover{
+  background:
+    rgba(255,255,255,.025);
+}
+
+.sev{
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:11px;
+
+  font-weight:600;
+
+  padding:3px 8px;
+
+  border-radius:4px;
+
+  height:fit-content;
+}
+
+.sev.high{
+  color:var(--red);
+
+  background:
+    rgba(255,113,106,.12);
+}
+
+.sev.med{
+  color:var(--amber);
+
+  background:
+    rgba(240,179,94,.12);
+}
+
+.sev.info{
+  color:var(--mint);
+
+  background:
+    rgba(99,230,201,.12);
+}
+
+.feed-row .id{
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:12px;
+
+  color:var(--muted);
+}
+
+.feed-row .desc{
+  font-size:13.5px;
+}
+
+.feed-row .desc .title{
+  font-weight:600;
+
+  display:block;
+
+  margin-bottom:3px;
+}
+
+.feed-row .desc .sub{
+  color:var(--muted);
+
+  font-size:12.5px;
+}
+
+.feed-row .link a{
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:12px;
+
+  color:var(--mint);
+}
+
+
+/* =========================
+   ROADMAP
+========================= */
+
+.timeline{
+  display:grid;
+
+  gap:14px;
+
+  margin-top:24px;
+}
+
+.step{
+  display:grid;
+
+  grid-template-columns:110px 1fr;
+
+  gap:18px;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  border:
+    1px solid var(--line);
+
+  background:var(--panel);
+
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+.step:hover{
+  transform:translateX(4px);
+
+  border-color:
+    rgba(99,230,201,.35);
+
+  box-shadow:
+    0 0 25px rgba(99,230,201,.05);
+}
+
+.step .when{
+  font-family:'IBM Plex Mono',monospace;
+
+  color:var(--mint);
+
+  font-size:12px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.4px;
+}
+
+.step h3{
+  font-size:18px;
+
+  margin-bottom:6px;
+}
+
+.step p{
+  color:var(--muted);
+
+  font-size:14px;
+}
+
+
+/* =========================
+   CERTIFICATIONS
+========================= */
+
+.certrow{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:12px;
+
+  margin-top:24px;
+}
+
+.cert{
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  background:var(--panel);
+
+  border:
+    1px solid var(--line);
+
+  border-radius:999px;
+
+  padding:12px 16px;
+
+  font-size:13.5px;
+
+  transition:
+    transform .2s ease,
+    border-color .2s ease;
+}
+
+.cert:hover{
+  transform:translateY(-2px);
+
+  border-color:
+    rgba(99,230,201,.35);
+}
+
+.cert .status{
+  width:8px;
+
+  height:8px;
+
+  border-radius:50%;
+
+  flex-shrink:0;
+}
+
+.status.done{
+  background:var(--mint);
+
+  box-shadow:
+    0 0 8px var(--mint);
+}
+
+.status.progress{
+  background:var(--amber);
+
+  box-shadow:
+    0 0 8px rgba(240,179,94,.5);
+}
+
+.cert .name{
+  font-weight:500;
+}
+
+.cert .meta{
+  color:var(--muted);
+
+  font-size:12px;
+
+  margin-left:4px;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contactgrid{
+  display:flex;
+
+  gap:14px;
+
+  flex-wrap:wrap;
+
+  margin-top:24px;
+}
+
+.cbtn{
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:13px;
+
+  padding:12px 20px;
+
+  border-radius:6px;
+
+  border:
+    1px solid var(--line);
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.cbtn:hover{
+  transform:translateY(-2px);
+}
+
+.cbtn.primary{
+  background:
+    linear-gradient(
+      135deg,
+      var(--mint),
+      var(--sky)
+    );
+
+  color:#061013;
+
+  border-color:transparent;
+
+  font-weight:700;
+}
+
+.cbtn:not(.primary):hover{
+  border-color:var(--mint);
+
+  color:var(--mint);
+}
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+.reveal{
+  opacity:0;
+
+  transform:
+    translateY(28px);
+
+  transition:
+    opacity .7s ease,
+    transform .7s ease;
+}
+
+.reveal.show{
+  opacity:1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  padding:34px 0 42px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  font-family:'IBM Plex Mono',monospace;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+  .hero-shell{
+    grid-template-columns:1fr;
+  }
+
+  .about-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about-main{
+    max-width:none;
+  }
+
+  .step{
+    grid-template-columns:1fr;
+
+    gap:8px;
+  }
+
+}
+
+
+@media(max-width:640px){
+
+  nav .wrap{
+    padding:14px 18px;
+  }
+
+  .wrap{
+    padding:0 18px;
+  }
+
+  header.hero{
+    padding-top:56px;
+  }
+
+  .role{
+    font-size:16px;
+  }
+
+  .summary{
+    font-size:15px;
+  }
+
+  .navlinks{
+    display:none;
+  }
+
+  .feed-head{
+    display:none;
+  }
+
+  .feed-row{
+    grid-template-columns:1fr;
+
+    gap:6px;
+  }
+
+  .term-body{
+    padding:18px;
+
+    font-size:12px;
+  }
+
+}
+
+
+/* Accessibility */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+
+    animation-iteration-count:1 !important;
+
+    scroll-behavior:auto !important;
+
+    transition-duration:.01ms !important;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- Cyber background -->
+
+<canvas id="cyber-bg"></canvas>
+
+<div class="scan-line"></div>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+  <div class="wrap">
+
+    <div class="brand">
+
+      <span class="dot"></span>
+
+      chandesh
+
+      <span style="color:var(--muted)">
+        /cybersecurity
+      </span>
+
+    </div>
+
+
+    <div class="navlinks">
+
+      <a href="#about">about</a>
+
+      <a href="#contact">contact</a>
+
+      <a href="#skills">skills</a>
+
+      <a href="#projects">projects</a>
+
+      <a href="#roadmap">roadmap</a>
+
+    </div>
+
+  </div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<header class="hero">
+
+  <div class="wrap">
+
+    <div class="hero-shell">
+
+
+      <div class="hero-copy">
+
+        <div class="eyebrow">
+          Cybersecurity Portfolio
+        </div>
+
+
+        <h1>
+
+          Building a future in
+          <span>defense</span>
+          and threat hunting.
+
+        </h1>
+
+
+        <p class="role">
+
+          Chandesh | aspiring SOC analyst,
+          bug bounty learner, and computer security graduate.
+
+        </p>
+
+
+        <p class="summary">
+
+          I am building practical cybersecurity skills through
+          security labs, vulnerability research, Python scripting,
+          Linux, networking, and application testing.
+
+        </p>
+
+
+        <div class="cta-row">
+
+          <a
+            class="cta primary"
+            href="#contact"
+          >
+            Contact me
+          </a>
+
+
+          <a
+            class="cta secondary"
+            href="#projects"
+          >
+            View work
+          </a>
+
+        </div>
+
+
+        <div class="hero-meta">
+
+          <span class="pill">
+            SOC fundamentals
+          </span>
+
+          <span class="pill">
+            Bug bounty practice
+          </span>
+
+          <span class="pill">
+            Linux & networking
+          </span>
+
+          <span class="pill">
+            Python scripting
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- TERMINAL -->
+
+      <div class="terminal">
+
+        <div class="term-bar">
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+
+        <div class="term-body">
+
+          <div class="term-line">
+
+            <span class="term-prompt">
+              visitor@chandesh:~$
+            </span>
+
+            <span id="terminal-command">
+              whoami
+            </span>
+
+          </div>
+
+
+          <div
+            id="terminal-output"
+            class="term-output"
+          >
+            Chandesh
+          </div>
+
+
+          <div class="term-line">
+
+            <span class="term-prompt">
+              visitor@chandesh:~$
+            </span>
+
+            <span id="terminal-command-2">
+              cat focus.txt
+            </span>
+
+          </div>
+
+
+          <div
+            id="terminal-output-2"
+            class="term-output"
+          >
+            SOC Analyst path, blue-team skills,
+            and practical security projects.
+          </div>
+
+
+          <div class="term-panel">
+
+            <strong>
+              Current goal
+            </strong>
+
+            <p>
+
+              Turn learning into proof:
+              labs, write-ups, security projects,
+              and practical tools.
+
+            </p>
+
+          </div>
+
+
+          <span class="cursor"></span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section id="about">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow">
+          About
+        </div>
+
+        <h2>
+          About me
+        </h2>
+
+      </div>
+
+
+      <div class="section-note">
+        who I am & where I'm going
+      </div>
+
+    </div>
+
+
+    <div class="about-grid">
+
+
+      <div class="about-main">
+
+        <p class="lead">
+
+          I'm Chandesh Gunawardena, a Computer Security graduate
+          with a strong interest in cybersecurity, SOC operations,
+          and defensive security.
+
+        </p>
+
+
+        <p
+          class="lead"
+          style="margin-top:14px;"
+        >
+
+          My background includes software testing and quality assurance,
+          where I developed practical experience with test documentation,
+          defect reporting, application testing, and identifying issues.
+
+          I am now building on that experience by developing
+          hands-on cybersecurity skills.
+
+        </p>
+
+
+        <p
+          class="lead"
+          style="margin-top:14px;"
+        >
+
+          I currently work with Python, Linux, Kali Linux,
+          Git, Nmap, Burp Suite, and other security tools
+          while practicing reconnaissance, vulnerability testing,
+          security labs, and bug bounty techniques.
+
+        </p>
+
+
+        <p
+          class="lead"
+          style="margin-top:14px;"
+        >
+
+          My goal is to start my career in a SOC Analyst L1,
+          Security Operations, or junior cybersecurity role
+          where I can continue learning while contributing
+          to real-world security operations.
+
+        </p>
+
+      </div>
+
+
+      <div class="about-side">
+
+
+        <div class="about-card">
+
+          <span class="about-label">
+            Education
+          </span>
+
+          <strong>
+            BSc Computer Security
+          </strong>
+
+          <span>
+            Plymouth University, UK
+          </span>
+
+        </div>
+
+
+        <div class="about-card">
+
+          <span class="about-label">
+            Focus
+          </span>
+
+          <strong>
+            SOC & Blue Team
+          </strong>
+
+          <span>
+            Security Operations & Threat Detection
+          </span>
+
+        </div>
+
+
+        <div class="about-card">
+
+          <span class="about-label">
+            Experience
+          </span>
+
+          <strong>
+            QA & Application Testing
+          </strong>
+
+          <span>
+            Manual Testing & Defect Reporting
+          </span>
+
+        </div>
+
+
+        <div class="about-card">
+
+          <span class="about-label">
+            Currently Learning
+          </span>
+
+          <strong>
+            Cybersecurity
+          </strong>
+
+          <span>
+            SIEM, Linux, Networking & Security Labs
+          </span>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <div class="stats">
+
+
+      <div class="stat">
+
+        <div class="num">
+          BSc
+        </div>
+
+        <div class="label">
+          Computer Security
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="num">
+          QA
+        </div>
+
+        <div class="label">
+          Testing Experience
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="num">
+          SOC
+        </div>
+
+        <div class="label">
+          Career Focus
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="num">
+          L1
+        </div>
+
+        <div class="label">
+          Target Role
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section id="contact">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow">
+          Get in touch
+        </div>
+
+        <h2>
+          Contact
+        </h2>
+
+      </div>
+
+
+      <div class="section-note">
+        open to entry-level roles
+      </div>
+
+    </div>
+
+
+    <p class="lead">
+
+      I am open to SOC Analyst L1,
+      Associate, and Trainee roles,
+      as well as internships and mentorship opportunities.
+
+    </p>
+
+
+    <div class="contactgrid">
+
+
+      <a
+        class="cbtn primary"
+        href="mailto:chandeshgunawardena@gmail.com"
+      >
+        Email me
+      </a>
+
+
+      <a
+        class="cbtn"
+        href="https://www.linkedin.com/in/chandesh-gunawardena-505520255/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        LinkedIn
+      </a>
+
+
+      <a
+        class="cbtn"
+        href="https://github.com/chandeshg"
+        target="_blank"
+        rel="noreferrer"
+      >
+        GitHub
+      </a>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SKILLS
+========================= -->
+
+<section id="skills">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow">
+          Capabilities
+        </div>
+
+        <h2>
+          Technical skills
+        </h2>
+
+      </div>
+
+
+      <div class="section-note">
+        what I bring to the table
+      </div>
+
+    </div>
+
+
+    <div class="skillgrid">
+
+
+      <!-- SECURITY -->
+
+      <div class="skillcard">
+
+        <h3>
+          Security & QA
+        </h3>
+
+        <p>
+          Core security knowledge and quality assurance
+          practices for testing and reporting issues.
+        </p>
+
+
+        <div class="skill-list">
+
+          <span class="skill-item">
+            🛡️ Cyber Security
+          </span>
+
+          <span class="skill-item">
+            Security Testing Fundamentals
+          </span>
+
+          <span class="skill-item">
+            🧪 Software Tester
+          </span>
+
+          <span class="skill-item">
+            Defect Tracking & Bug Reporting
+          </span>
+
+          <span class="skill-item">
+            🎯 Bug Bounty Hunting
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROGRAMMING -->
+
+      <div class="skillcard">
+
+        <h3>
+          Programming & Systems
+        </h3>
+
+        <p>
+          Programming and operating system knowledge for
+          cybersecurity labs, automation, scripting,
+          and technical testing.
+        </p>
+
+
+        <div class="skill-list">
+
+
+          <span class="skill-item">
+
+            <i class="devicon-python-plain"></i>
+
+            Python
+
+          </span>
+
+
+          <span class="skill-item">
+
+            <i class="devicon-linux-plain"></i>
+
+            Linux
+
+          </span>
+
+
+          <span class="skill-item">
+
+            <span class="skill-icon">
+              🐉
+            </span>
+
+            Kali Linux
+
+          </span>
+
+
+          <span class="skill-item">
+
+            <i class="devicon-git-plain"></i>
+
+            Git
+
+          </span>
+
+
+          <span class="skill-item">
+
+            <i class="devicon-github-original"></i>
+
+            GitHub
+
+          </span>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- APPLICATION TESTING -->
+
+      <div class="skillcard">
+
+        <h3>
+          Application Testing
+        </h3>
+
+        <p>
+          Hands-on testing experience across web technologies
+          and healthcare billing systems.
+        </p>
+
+
+        <div class="skill-list">
+
+          <span class="skill-item">
+            🌐 Website Testing
+          </span>
+
+          <span class="skill-item">
+            HTML
+          </span>
+
+          <span class="skill-item">
+            CSS
+          </span>
+
+          <span class="skill-item">
+            Java
+          </span>
+
+          <span class="skill-item">
+            EHR/Billing Systems
+          </span>
+
+          <span class="skill-item">
+            Microsoft Excel
+          </span>
+
+          <span class="skill-item">
+            openpyxl Automation
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- SECURITY TOOLS -->
+
+      <div class="skillcard">
+
+        <h3>
+          Security Tools
+        </h3>
+
+        <p>
+          Security tooling for reconnaissance,
+          enumeration, vulnerability scanning,
+          and web application testing.
+        </p>
+
+
+        <div class="skill-list">
+
+          <span class="skill-item">
+            🛡️ Burp Suite
+          </span>
+
+          <span class="skill-item">
+            🔎 Nmap
+          </span>
+
+          <span class="skill-item">
+            Nuclei
+          </span>
+
+          <span class="skill-item">
+            FFUF
+          </span>
+
+          <span class="skill-item">
+            Subfinder
+          </span>
+
+          <span class="skill-item">
+            HTTPX
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PROJECTS
+========================= -->
+
+<section id="projects">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow">
+          Field Notes
+        </div>
+
+        <h2>
+          Bug bounty and lab write-ups
+        </h2>
+
+      </div>
+
+
+      <div class="section-note">
+        practical security work
+      </div>
+
+    </div>
+
+
+    <p class="lead">
+
+      A collection of security research,
+      labs, write-ups, and practical projects.
+
+    </p>
+
+
+    <div class="feed">
+
+
+      <div class="feed-head">
+
+        <div>
+          Type
+        </div>
+
+        <div>
+          ID
+        </div>
+
+        <div>
+          Project
+        </div>
+
+        <div>
+          Link
+        </div>
+
+      </div>
+
+
+      <!-- PROJECT 1 -->
+
+      <div class="feed-row">
+
+        <span class="sev med">
+          MEDIUM
+        </span>
+
+        <span class="id">
+          RPT-001
+        </span>
+
+        <div class="desc">
+
+          <span class="title">
+
+            I Built 3 Python Security Tools in a Month.
+            Here's What I Actually Learned.
+
+          </span>
+
+          <span class="sub">
+
+            From manual QA tester to writing my own
+            reconnaissance and security tooling.
+
+          </span>
+
+        </div>
+
+        <span class="link">
+
+          <a
+            href="https://medium.com/@chandeshgunawardena/i-built-3-python-security-tools-in-a-month-heres-what-i-actually-learned-175eec925b1a?sharedUserId=chandeshgunawardena"
+            target="_blank"
+            rel="noreferrer"
+          >
+            view →
+          </a>
+
+        </span>
+
+      </div>
+
+
+      <!-- PROJECT 2 -->
+
+      <div class="feed-row">
+
+        <span class="sev info">
+          LAB
+        </span>
+
+        <span class="id">
+          LAB-014
+        </span>
+
+        <div class="desc">
+
+          <span class="title">
+            SOC Level 1 Security Labs
+          </span>
+
+          <span class="sub">
+            SOC investigation and defensive security practice.
+          </span>
+
+        </div>
+
+        <span class="link">
+
+          <a
+            href="https://tryhackme.com/p/chandeshg"
+            target="_blank"
+            rel="noreferrer"
+          >
+            view →
+          </a>
+
+        </span>
+
+      </div>
+
+
+      <!-- PROJECT 3 -->
+
+      <div class="feed-row">
+
+        <span class="sev high">
+          CTF
+        </span>
+
+        <span class="id">
+          PICO-22
+        </span>
+
+        <div class="desc">
+
+          <span class="title">
+            picoCTF Forensic Log Analysis
+          </span>
+
+          <span class="sub">
+            Challenge methodology, investigation,
+            and lessons learned.
+          </span>
+
+        </div>
+
+        <span class="link">
+
+          <a href="#">
+            soon →
+          </a>
+
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ROADMAP
+========================= -->
+
+<section id="roadmap">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow">
+          Roadmap
+        </div>
+
+        <h2>
+          What I am working on next
+        </h2>
+
+      </div>
+
+
+      <div class="section-note">
+        career growth plan
+      </div>
+
+    </div>
+
+
+    <p class="lead">
+
+      My current roadmap focuses on turning cybersecurity
+      learning into practical, documented experience.
+
+    </p>
+
+
+    <div class="timeline">
+
+
+      <div class="step">
+
+        <div class="when">
+          Now
+        </div>
+
+        <div>
+
+          <h3>
+            Build a security project library
+          </h3>
+
+          <p>
+
+            Turn labs, CTFs, Python tools, and security
+            practice into short technical write-ups.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="when">
+          Next
+        </div>
+
+        <div>
+
+          <h3>
+            Strengthen SOC fundamentals
+          </h3>
+
+          <p>
+
+            Practice alert triage, Windows event analysis,
+            Linux logging, incident response,
+            and SIEM fundamentals.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="when">
+          Soon
+        </div>
+
+        <div>
+
+          <h3>
+            Build a stronger GitHub portfolio
+          </h3>
+
+          <p>
+
+            Publish Python security tools,
+            lab notes, automation projects,
+            and cybersecurity documentation.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CERTIFICATIONS
+========================= -->
+
+<section
+  id="certs"
+  style="border-bottom:none;"
+>
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow">
+          Credentials
+        </div>
+
+        <h2>
+          Certifications and badges
+        </h2>
+
+      </div>
+
+
+      <div class="section-note">
+        continuous learning
+      </div>
+
+    </div>
+
+
+    <p class="lead">
+
+      Current cybersecurity learning and certifications.
+
+    </p>
+
+
+    <div class="certrow">
+
+
+      <div class="cert">
+
+        <span class="status progress"></span>
+
+        <span class="name">
+          Cisco Intro to Cybersecurity
+        </span>
+
+        <span class="meta">
+          in progress
+        </span>
+
+      </div>
+
+
+      <div class="cert">
+
+        <span class="status progress"></span>
+
+        <span class="name">
+          IBM SkillsBuild - Security Ops
+        </span>
+
+        <span class="meta">
+          in progress
+        </span>
+
+      </div>
+
+
+      <div class="cert">
+
+        <span class="status progress"></span>
+
+        <span class="name">
+          TryHackMe SOC Level 1
+        </span>
+
+        <span class="meta">
+          in progress
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  built for a cybersecurity career path
+
+</footer>
+
+
+
+<script>
+
+/* =====================================================
+   CYBER NETWORK BACKGROUND
+===================================================== */
+
+const canvas =
+  document.getElementById("cyber-bg");
+
+const ctx =
+  canvas.getContext("2d");
+
+let width;
+let height;
+
+let particles = [];
+
+let particleCount =
+  window.innerWidth < 700 ? 35 : 65;
+
+
+/* Resize */
+
+function resizeCanvas(){
+
+  width =
+    canvas.width =
+    window.innerWidth;
+
+  height =
+    canvas.height =
+    window.innerHeight;
+
+}
+
+resizeCanvas();
+
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    resizeCanvas();
+
+  }
+);
+
+
+/* Create particles */
+
+function createParticles(){
+
+  particles = [];
+
+  for(
+    let i = 0;
+    i < particleCount;
+    i++
+  ){
+
+    particles.push({
+
+      x:
+        Math.random() *
+        window.innerWidth,
+
+      y:
+        Math.random() *
+        window.innerHeight,
+
+      vx:
+        (Math.random() - .5) *
+        .25,
+
+      vy:
+        (Math.random() - .5) *
+        .25,
+
+      size:
+        Math.random() *
+        1.5 +
+        .5
+
+    });
+
+  }
+
+}
+
+createParticles();
+
+
+/* Draw */
+
+function drawCyberBackground(){
+
+  ctx.clearRect(
+    0,
+    0,
+    width,
+    height
+  );
+
+
+  for(
+    let i = 0;
+    i < particles.length;
+    i++
+  ){
+
+    const p =
+      particles[i];
+
+
+    /* Movement */
+
+    p.x += p.vx;
+
+    p.y += p.vy;
+
+
+    /* Wrap */
+
+    if(
+      p.x < 0
+    ){
+      p.x = width;
+    }
+
+    if(
+      p.x > width
+    ){
+      p.x = 0;
+    }
+
+    if(
+      p.y < 0
+    ){
+      p.y = height;
+    }
+
+    if(
+      p.y > height
+    ){
+      p.y = 0;
+    }
+
+
+    /* Node */
+
+    ctx.beginPath();
+
+    ctx.arc(
+      p.x,
+      p.y,
+      p.size,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fillStyle =
+      "rgba(99,230,201,.55)";
+
+    ctx.fill();
+
+
+    /* Connections */
+
+    for(
+      let j = i + 1;
+      j < particles.length;
+      j++
+    ){
+
+      const p2 =
+        particles[j];
+
+
+      const dx =
+        p.x - p2.x;
+
+      const dy =
+        p.y - p2.y;
+
+
+      const distance =
+        Math.sqrt(
+          dx * dx +
+          dy * dy
+        );
+
+
+      if(
+        distance < 125
+      ){
+
+        const opacity =
+          .12 *
+          (
+            1 -
+            distance / 125
+          );
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+          p.x,
+          p.y
+        );
+
+        ctx.lineTo(
+          p2.x,
+          p2.y
+        );
+
+        ctx.strokeStyle =
+          `rgba(99,230,201,${opacity})`;
+
+        ctx.lineWidth =
+          .6;
+
+        ctx.stroke();
+
+      }
+
+    }
+
+  }
+
+
+  requestAnimationFrame(
+    drawCyberBackground
+  );
+
+}
+
+
+drawCyberBackground();
+
+
+
+/* =====================================================
+   TERMINAL TYPING EFFECT
+===================================================== */
+
+const commands = [
+
+  {
+    command:"whoami",
+
+    output:"Chandesh"
+  },
+
+  {
+    command:"cat focus.txt",
+
+    output:
+      "SOC Analyst path, blue-team skills, and practical security projects."
+  },
+
+  {
+    command:"python security.py",
+
+    output:
+      "[+] Learning cybersecurity through practical projects."
+  },
+
+  {
+    command:"git status",
+
+    output:
+      "On branch cybersecurity • building new projects..."
+  }
+
+];
+
+
+let terminalIndex = 0;
+
+
+const commandElement =
+  document.getElementById(
+    "terminal-command"
+  );
+
+const outputElement =
+  document.getElementById(
+    "terminal-output"
+  );
+
+
+const commandElement2 =
+  document.getElementById(
+    "terminal-command-2"
+  );
+
+const outputElement2 =
+  document.getElementById(
+    "terminal-output-2"
+  );
+
+
+function typeText(
+  element,
+  text,
+  speed = 45
+){
+
+  return new Promise(
+    resolve => {
+
+      element.textContent = "";
+
+      let index = 0;
+
+
+      const interval =
+        setInterval(
+          () => {
+
+            element.textContent +=
+              text[index];
+
+            index++;
+
+
+            if(
+              index >= text.length
+            ){
+
+              clearInterval(
+                interval
+              );
+
+              resolve();
+
+            }
+
+          },
+          speed
+        );
+
+    }
+  );
+
+}
+
+
+async function terminalAnimation(){
+
+  const current =
+    commands[
+      terminalIndex
+    ];
+
+
+  commandElement.textContent =
+    "";
+
+  outputElement.textContent =
+    "";
+
+  commandElement2.textContent =
+    "";
+
+  outputElement2.textContent =
+    "";
+
+
+  await typeText(
+    commandElement,
+    current.command
+  );
+
+
+  await new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        300
+      )
+  );
+
+
+  await typeText(
+    outputElement,
+    current.output,
+    25
+  );
+
+
+  await new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        400
+      )
+  );
+
+
+  terminalIndex =
+    (
+      terminalIndex + 1
+    ) %
+    commands.length;
+
+
+  const next =
+    commands[
+      terminalIndex
+    ];
+
+
+  await typeText(
+    commandElement2,
+    next.command
+  );
+
+
+  await new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        300
+      )
+  );
+
+
+  await typeText(
+    outputElement2,
+    next.output,
+    25
+  );
+
+
+  setTimeout(
+    terminalAnimation,
+    3500
+  );
+
+}
+
+
+terminalAnimation();
+
+
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+
+const revealElements =
+  document.querySelectorAll(
+    "section, .skillcard, .stat, .step, .about-card, .feed, .cert"
+  );
+
+
+revealElements.forEach(
+  element => {
+
+    element.classList.add(
+      "reveal"
+    );
+
+  }
+);
+
+
+const observer =
+  new IntersectionObserver(
+
+    entries => {
+
+      entries.forEach(
+        entry => {
+
+          if(
+            entry.isIntersecting
+          ){
+
+            entry.target.classList.add(
+              "show"
+            );
+
+
+            observer.unobserve(
+              entry.target
+            );
+
+          }
+
+        }
+      );
+
+    },
+
+    {
+      threshold:.12
+    }
+
+  );
+
+
+revealElements.forEach(
+  element => {
+
+    observer.observe(
+      element
+    );
+
+  }
+);
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+if(
+  window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches
+){
+
+  document
+    .querySelector(".scan-line")
+    .style.display =
+    "none";
+
+}
+
+</script>
+
+
+</body>
+</html>
