@@ -35,6 +35,49 @@
   --red:#ff716a;
 
   --shadow:0 24px 80px rgba(0,0,0,0.38);
+
+  --grid-line:rgba(255,255,255,0.025);
+  --nav-bg:rgba(7,17,22,.72);
+  --body-end:#051015;
+  --canvas-opacity:.42;
+  --pill-bg:rgba(10,20,27,.7);
+
+  /* Terminal always stays dark, so give it fixed colors
+     that don't shift with the light/dark theme toggle */
+  --term-text:#e7f2f6;
+  --term-muted:#8da2ad;
+  --term-mint:#63e6c9;
+  --term-sky:#7cc7ff;
+}
+
+/* =========================
+   LIGHT THEME OVERRIDES
+========================= */
+
+body.light-theme{
+  --bg:#f4f8fa;
+  --bg-2:#e6edf1;
+  --panel:rgba(255,255,255,0.88);
+  --panel-2:rgba(255,255,255,0.97);
+
+  --line:rgba(20,45,55,0.14);
+  --line-strong:rgba(20,45,55,0.26);
+
+  --text:#0c1a20;
+  --muted:#4d6169;
+
+  --mint:#0c9a80;
+  --sky:#1f74c9;
+  --amber:#b06a12;
+  --red:#c8392f;
+
+  --shadow:0 24px 80px rgba(20,40,55,0.14);
+
+  --grid-line:rgba(10,30,40,0.035);
+  --nav-bg:rgba(244,248,250,.78);
+  --body-end:#e6edf1;
+  --canvas-opacity:.22;
+  --pill-bg:rgba(255,255,255,.75);
 }
 
 
@@ -78,8 +121,10 @@ body{
       180deg,
       var(--bg) 0%,
       var(--bg-2) 55%,
-      #051015 100%
+      var(--body-end) 100%
     );
+
+  transition:background .35s ease, color .35s ease;
 }
 
 
@@ -94,12 +139,12 @@ body::before{
 
   background-image:
     linear-gradient(
-      rgba(255,255,255,0.025) 1px,
+      var(--grid-line) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(255,255,255,0.025) 1px,
+      var(--grid-line) 1px,
       transparent 1px
     );
 
@@ -272,12 +317,14 @@ nav{
   z-index:50;
 
   background:
-    rgba(7,17,22,.72);
+    var(--nav-bg);
 
   backdrop-filter:blur(14px);
 
   border-bottom:
-    1px solid rgba(130,170,183,.12);
+    1px solid var(--line);
+
+  transition:background .35s ease, border-color .35s ease;
 }
 
 nav .wrap{
@@ -352,6 +399,116 @@ nav .wrap{
 
 .navlinks a:hover{
   color:var(--mint);
+}
+
+.theme-toggle{
+  position:relative;
+
+  width:38px;
+  height:38px;
+
+  margin-left:22px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:50%;
+
+  border:1px solid var(--line);
+
+  background:rgba(130,170,183,.06);
+
+  color:var(--mint);
+
+  cursor:pointer;
+
+  flex-shrink:0;
+
+  transition:
+    border-color .2s ease,
+    background .2s ease,
+    color .2s ease,
+    transform .2s ease;
+}
+
+.theme-toggle:hover{
+  border-color:var(--mint);
+
+  color:var(--mint);
+
+  transform:translateY(-2px);
+}
+
+.theme-toggle .icon{
+  width:18px;
+  height:18px;
+
+  position:absolute;
+
+  transition:
+    opacity .25s ease,
+    transform .35s ease;
+}
+
+.theme-toggle .icon-sun{
+  opacity:0;
+
+  transform:rotate(-90deg) scale(.5);
+}
+
+.theme-toggle .icon-moon{
+  opacity:1;
+
+  transform:rotate(0) scale(1);
+}
+
+body.light-theme .theme-toggle .icon-sun{
+  opacity:1;
+
+  transform:rotate(0) scale(1);
+}
+
+body.light-theme .theme-toggle .icon-moon{
+  opacity:0;
+
+  transform:rotate(90deg) scale(.5);
+}
+
+.sound-toggle{
+  margin-left:10px;
+}
+
+.sound-toggle .icon-sound-on{
+  opacity:0;
+
+  transform:scale(.5);
+}
+
+.sound-toggle .icon-sound-off{
+  opacity:1;
+
+  transform:scale(1);
+}
+
+.sound-toggle.is-on .icon-sound-on{
+  opacity:1;
+
+  transform:scale(1);
+
+  color:var(--mint);
+}
+
+.sound-toggle.is-on .icon-sound-off{
+  opacity:0;
+
+  transform:scale(.5);
+}
+
+.sound-toggle.is-on{
+  border-color:var(--mint);
 }
 
 
@@ -504,7 +661,7 @@ h1 span{
   color:var(--muted);
 
   background:
-    rgba(10,20,27,.7);
+    var(--pill-bg);
 
   border:
     1px solid var(--line);
@@ -512,6 +669,8 @@ h1 span{
   border-radius:999px;
 
   padding:8px 12px;
+
+  transition:background .35s ease, color .35s ease, border-color .35s ease;
 }
 
 
@@ -609,17 +768,17 @@ h1 span{
 .term-line{
   margin-bottom:8px;
 
-  color:var(--muted);
+  color:var(--term-muted);
 
   min-height:20px;
 }
 
 .term-prompt{
-  color:var(--mint);
+  color:var(--term-mint);
 }
 
 .term-output{
-  color:var(--text);
+  color:var(--term-text);
 
   margin-bottom:12px;
 }
@@ -643,7 +802,7 @@ h1 span{
 
   margin-bottom:6px;
 
-  color:var(--sky);
+  color:var(--term-sky);
 
   font-size:12px;
 
@@ -653,7 +812,7 @@ h1 span{
 }
 
 .term-panel p{
-  color:var(--muted);
+  color:var(--term-muted);
 
   font-size:13px;
 }
@@ -667,7 +826,7 @@ h1 span{
 
   margin-left:2px;
 
-  background:var(--mint);
+  background:var(--term-mint);
 
   vertical-align:middle;
 
@@ -1472,12 +1631,35 @@ footer{
 
 <body>
 
+<script>
+  (function(){
+    try{
+      var saved = localStorage.getItem("theme");
+      var prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+      if(saved === "light" || (!saved && prefersLight)){
+        document.body.classList.add("light-theme");
+      }
+    }catch(e){}
+  })();
+</script>
+
 
 <!-- Cyber background -->
 
 <canvas id="cyber-bg"></canvas>
 
 <div class="scan-line"></div>
+
+
+<!-- Background music
+     Put your mp3 file in an "assets/audio" folder next to
+     this HTML file, then change the src below to match
+     your filename. You can add more <source> lines for
+     other formats (e.g. .ogg) as fallbacks. -->
+
+<audio id="bg-music" loop preload="none">
+  <source src="assets\audio\theme-song.mp3" type="audio/mpeg">
+</audio>
 
 
 <!-- =========================
@@ -1514,6 +1696,47 @@ footer{
       <a href="#roadmap">roadmap</a>
 
     </div>
+
+    <button
+      id="sound-toggle"
+      class="theme-toggle sound-toggle"
+      type="button"
+      aria-label="Toggle ambient sound"
+      aria-pressed="false"
+      title="Toggle ambient sound"
+    >
+
+      <svg class="icon icon-sound-off" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 9V15H8L13 20V4L8 9H4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M17 9L21 15M21 9L17 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+
+      <svg class="icon icon-sound-on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 9V15H8L13 20V4L8 9H4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M16.5 8.5C17.5 9.5 18 10.7 18 12C18 13.3 17.5 14.5 16.5 15.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M19 6C20.7 7.7 21.5 9.8 21.5 12C21.5 14.2 20.7 16.3 19 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+
+    </button>
+
+    <button
+      id="theme-toggle"
+      class="theme-toggle"
+      type="button"
+      aria-label="Toggle light and dark theme"
+      title="Toggle theme"
+    >
+
+      <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.5 14.5C19.16 15.13 17.66 15.5 16.08 15.5C10.28 15.5 5.58 10.8 5.58 5C5.58 3.42 5.95 1.92 6.58 0.58C3.24 2.11 1 5.53 1 9.5C1 14.75 5.25 19 10.5 19C14.47 19 17.89 16.76 19.42 13.42C19.79 13.94 20.14 14.24 20.5 14.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" fill="currentColor"/>
+      </svg>
+
+      <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M12 2.5V4.5M12 19.5V21.5M21.5 12H19.5M4.5 12H2.5M18.4 5.6L17 7M7 17L5.6 18.4M18.4 18.4L17 17M7 7L5.6 5.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+
+    </button>
 
   </div>
 
@@ -2683,6 +2906,25 @@ let particleCount =
   window.innerWidth < 700 ? 35 : 65;
 
 
+/* Theme-aware particle colors */
+
+function isLightTheme(){
+  return document.body.classList.contains("light-theme");
+}
+
+function particleColor(){
+  return isLightTheme()
+    ? "rgba(12,154,128,.6)"
+    : "rgba(99,230,201,.55)";
+}
+
+function lineColor(opacity){
+  return isLightTheme()
+    ? `rgba(12,154,128,${opacity})`
+    : `rgba(99,230,201,${opacity})`;
+}
+
+
 /* Resize */
 
 function resizeCanvas(){
@@ -2823,7 +3065,7 @@ function drawCyberBackground(){
     );
 
     ctx.fillStyle =
-      "rgba(99,230,201,.55)";
+      particleColor();
 
     ctx.fill();
 
@@ -2879,7 +3121,7 @@ function drawCyberBackground(){
         );
 
         ctx.strokeStyle =
-          `rgba(99,230,201,${opacity})`;
+          lineColor(opacity);
 
         ctx.lineWidth =
           .6;
@@ -3193,6 +3435,156 @@ if(
     "none";
 
 }
+
+
+/* =====================================================
+   THEME TOGGLE
+===================================================== */
+
+const themeToggle =
+  document.getElementById("theme-toggle");
+
+function setCanvasOpacity(){
+
+  canvas.style.opacity =
+    getComputedStyle(document.body)
+      .getPropertyValue("--canvas-opacity")
+      .trim();
+
+}
+
+setCanvasOpacity();
+
+if(themeToggle){
+
+  themeToggle.addEventListener(
+    "click",
+    () => {
+
+      document.body.classList.toggle(
+        "light-theme"
+      );
+
+      const isLight =
+        document.body.classList.contains(
+          "light-theme"
+        );
+
+      try{
+        localStorage.setItem(
+          "theme",
+          isLight ? "light" : "dark"
+        );
+      }catch(e){}
+
+      setCanvasOpacity();
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   BACKGROUND MUSIC TOGGLE
+   Plays/pauses the <audio id="bg-music"> element.
+   Add your own mp3 at assets/audio/theme-song.mp3
+   (or update the <source src> above to match your file).
+===================================================== */
+
+const soundToggle =
+  document.getElementById("sound-toggle");
+
+const bgMusic =
+  document.getElementById("bg-music");
+
+let musicOn = false;
+
+if(bgMusic){
+  bgMusic.volume = 0;
+}
+
+function fadeAudio(target, duration){
+
+  if(!bgMusic) return;
+
+  const steps = 20;
+  const stepTime = duration / steps;
+  const startVol = bgMusic.volume;
+  const diff = target - startVol;
+
+  let count = 0;
+
+  const interval = setInterval(() => {
+
+    count++;
+
+    bgMusic.volume = Math.min(
+      1,
+      Math.max(0, startVol + diff * (count / steps))
+    );
+
+    if(count >= steps){
+      clearInterval(interval);
+
+      if(target === 0){
+        bgMusic.pause();
+      }
+    }
+
+  }, stepTime);
+
+}
+
+function startMusic(){
+
+  if(!bgMusic) return;
+
+  bgMusic
+    .play()
+    .then(() => {
+      fadeAudio(0.5, 800);
+    })
+    .catch(() => {
+      /* Playback blocked or file missing/not found yet */
+      musicOn = false;
+      soundToggle.classList.remove("is-on");
+      soundToggle.setAttribute("aria-pressed", "false");
+    });
+
+}
+
+function stopMusic(){
+
+  fadeAudio(0, 600);
+
+}
+
+if(soundToggle){
+
+  soundToggle.classList.remove("is-on");
+  soundToggle.setAttribute("aria-pressed", "false");
+
+  soundToggle.addEventListener("click", () => {
+
+    musicOn = !musicOn;
+
+    soundToggle.classList.toggle("is-on", musicOn);
+    soundToggle.setAttribute(
+      "aria-pressed",
+      musicOn ? "true" : "false"
+    );
+
+    if(musicOn){
+      startMusic();
+    }else{
+      stopMusic();
+    }
+
+  });
+
+}
+
 
 </script>
 
