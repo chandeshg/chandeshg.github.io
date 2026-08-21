@@ -621,6 +621,121 @@ body.light-theme .theme-toggle .icon-moon{
   margin-left:10px;
 }
 
+/* =========================
+   NOW PLAYING TOAST
+========================= */
+
+.now-playing-toast{
+  position:fixed;
+
+  top:78px;
+
+  right:24px;
+
+  z-index:200;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  padding:10px 16px;
+
+  border-radius:10px;
+
+  border:1px solid var(--line);
+
+  background:var(--panel);
+
+  backdrop-filter:blur(14px);
+
+  box-shadow:0 12px 32px rgba(0,0,0,.28);
+
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:12px;
+
+  color:var(--text);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transform:translateY(-10px) scale(.97);
+
+  transition:
+    opacity .35s ease,
+    transform .35s ease;
+}
+
+.now-playing-toast.show{
+  opacity:1;
+
+  transform:translateY(0) scale(1);
+}
+
+.np-dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:var(--mint);
+
+  box-shadow:0 0 6px var(--mint);
+
+  flex-shrink:0;
+
+  animation:blink 1.4s ease-in-out infinite;
+}
+
+.np-label{
+  color:var(--muted);
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+
+  font-size:10.5px;
+
+  flex-shrink:0;
+}
+
+.np-title{
+  color:var(--mint);
+
+  font-weight:600;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  max-width:220px;
+}
+
+@media(max-width:640px){
+
+  .now-playing-toast{
+    top:auto;
+
+    bottom:20px;
+
+    right:16px;
+
+    left:16px;
+
+    max-width:none;
+  }
+
+  .np-title{
+    max-width:none;
+  }
+
+}
+
 .sound-toggle .icon-sound-on{
   opacity:0;
 
@@ -1800,6 +1915,23 @@ footer{
 <audio id="bg-music" loop preload="none">
   <source src="assets/audio/theme-song.mp3.mp3" type="audio/mpeg">
 </audio>
+
+
+<!-- "Now playing" toast, shown when music is unmuted.
+     Change the song title in the JS constant NOW_PLAYING
+     further down the page. -->
+
+<div id="now-playing-toast" class="now-playing-toast">
+
+  <span class="np-dot"></span>
+
+  <span class="np-label">
+    Now playing
+  </span>
+
+  <span class="np-title" id="np-title"></span>
+
+</div>
 
 
 <!-- =========================
@@ -3658,16 +3790,54 @@ if(themeToggle){
    (or update the <source src> above to match your file).
 ===================================================== */
 
+/* Edit this to match your actual track */
+const NOW_PLAYING = "Coldplay - Yellow";
+
 const soundToggle =
   document.getElementById("sound-toggle");
 
 const bgMusic =
   document.getElementById("bg-music");
 
+const nowPlayingToast =
+  document.getElementById("now-playing-toast");
+
+const npTitle =
+  document.getElementById("np-title");
+
 let musicOn = false;
+let toastHideTimer = null;
 
 if(bgMusic){
   bgMusic.volume = 0;
+}
+
+if(npTitle){
+  npTitle.textContent = NOW_PLAYING;
+}
+
+function showNowPlayingToast(){
+
+  if(!nowPlayingToast) return;
+
+  clearTimeout(toastHideTimer);
+
+  nowPlayingToast.classList.add("show");
+
+  toastHideTimer = setTimeout(() => {
+    nowPlayingToast.classList.remove("show");
+  }, 4000);
+
+}
+
+function hideNowPlayingToast(){
+
+  if(!nowPlayingToast) return;
+
+  clearTimeout(toastHideTimer);
+
+  nowPlayingToast.classList.remove("show");
+
 }
 
 function fadeAudio(target, duration){
@@ -3710,6 +3880,7 @@ function startMusic(){
     .play()
     .then(() => {
       fadeAudio(0.5, 800);
+      showNowPlayingToast();
     })
     .catch(() => {
       /* Playback blocked or file missing/not found yet */
@@ -3723,6 +3894,8 @@ function startMusic(){
 function stopMusic(){
 
   fadeAudio(0, 600);
+
+  hideNowPlayingToast();
 
 }
 
