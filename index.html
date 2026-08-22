@@ -179,7 +179,7 @@ body::before{
 
   z-index:-2;
 
-  opacity:.42;
+  opacity:.26;
 }
 
 
@@ -194,29 +194,29 @@ body::before{
 
   width:100%;
 
-  height:1px;
+  height:0.8px;
 
   background:
     linear-gradient(
       90deg,
       transparent,
       rgba(99,230,201,0),
-      rgba(99,230,201,.5),
+      rgba(99,230,201,.35),
       rgba(124,199,255,0),
       transparent
     );
 
   box-shadow:
-    0 0 14px rgba(99,230,201,.25);
+    0 0 10px rgba(99,230,201,.15);
 
   pointer-events:none;
 
   z-index:40;
 
-  opacity:.35;
+  opacity:.2;
 
   animation:
-    scan 9s linear infinite;
+    scan 16s linear infinite;
 }
 
 @keyframes scan{
@@ -415,44 +415,39 @@ nav .wrap{
   margin-bottom:26px;
 }
 
-.avatar-ring{
+.avatar-card{
   position:relative;
 
-  width:84px;
-  height:84px;
+  width:92px;
+  height:92px;
 
   flex-shrink:0;
 
-  border-radius:50%;
+  border-radius:18px;
 
-  cursor:pointer;
+  padding:6px;
 
-  transition:transform .35s ease;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(99,230,201,.75),
+      rgba(124,199,255,.68),
+      rgba(99,230,201,.18)
+    );
+
+  box-shadow:
+    0 0 20px rgba(99,230,201,.08),
+    inset 0 0 0 1px rgba(255,255,255,.06);
+
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 
-.avatar-ring::before{
-  content:'';
+.avatar-card:hover{
+  transform:translateY(-1px);
 
-  position:absolute;
-
-  inset:-4px;
-
-  border-radius:50%;
-
-  background:conic-gradient(
-    from 0deg,
-    var(--mint),
-    var(--sky),
-    var(--mint)
-  );
-
-  box-shadow:0 0 22px rgba(99,230,201,.35);
-
-  animation:spin-ring 5s linear infinite;
-}
-
-.avatar-ring:hover{
-  transform:translateY(-3px) scale(1.03);
+  box-shadow:
+    0 0 24px rgba(99,230,201,.12),
+    inset 0 0 0 1px rgba(255,255,255,.1);
 }
 
 .avatar-photo{
@@ -465,25 +460,25 @@ nav .wrap{
   width:100%;
   height:100%;
 
-  border-radius:50%;
+  border-radius:14px;
 
   object-fit:cover;
 
-  border:3px solid var(--bg);
+  border:2px solid rgba(7,17,22,.7);
 
-  filter:grayscale(1) contrast(1.05) brightness(.96);
+  background:rgba(9,18,24,.7);
 
-  transition:filter .45s ease, transform .45s ease;
+  filter:grayscale(1) contrast(1.04) brightness(.98);
+
+  transition:filter .45s ease, transform .35s ease, box-shadow .35s ease;
 }
 
-.avatar-ring:hover .avatar-photo{
-  filter:grayscale(0) contrast(1) brightness(1);
+.avatar-card:hover .avatar-photo{
+  filter:grayscale(0) contrast(1.06) brightness(1);
 
-  transform:scale(1.04);
-}
+  transform:scale(1.01);
 
-@keyframes spin-ring{
-  to{ transform:rotate(360deg); }
+  box-shadow:0 0 18px rgba(99,230,201,.08);
 }
 
 .avatar-intro{
@@ -968,12 +963,12 @@ h1 span{
     linear-gradient(
       180deg,
       transparent,
-      rgba(99,230,201,.025),
+      rgba(99,230,201,.015),
       transparent
     );
 
   animation:
-    terminalGlow 4s ease-in-out infinite;
+    terminalGlow 9s ease-in-out infinite;
 }
 
 @keyframes terminalGlow{
@@ -1759,11 +1754,11 @@ section{
   opacity:0;
 
   transform:
-    translateY(28px);
+    translateY(18px);
 
   transition:
-    opacity .7s ease,
-    transform .7s ease;
+    opacity .5s ease,
+    transform .5s ease;
 }
 
 .reveal.show{
@@ -2032,7 +2027,7 @@ footer{
 
         <div class="hero-avatar-row">
 
-          <div class="avatar-ring">
+          <div class="avatar-card">
             <img
               src="assets/img/profile.png.PNG"
               alt="Chandesh"
@@ -3203,7 +3198,7 @@ let height;
 let particles = [];
 
 let particleCount =
-  window.innerWidth < 700 ? 35 : 65;
+  window.innerWidth < 700 ? 24 : 42;
 
 
 /* Theme-aware particle colors */
@@ -3276,11 +3271,11 @@ function createParticles(){
 
       vx:
         (Math.random() - .5) *
-        .25,
+        .12,
 
       vy:
         (Math.random() - .5) *
-        .25,
+        .12,
 
       size:
         Math.random() *
@@ -3397,14 +3392,14 @@ function drawCyberBackground(){
 
 
       if(
-        distance < 125
+        distance < 95
       ){
 
         const opacity =
-          .12 *
+          .08 *
           (
             1 -
-            distance / 125
+            distance / 95
           );
 
 
@@ -3510,7 +3505,7 @@ const outputElement2 =
 function typeText(
   element,
   text,
-  speed = 45
+  speed = 55
 ){
 
   return new Promise(
@@ -3592,7 +3587,7 @@ async function terminalAnimation(){
   await typeText(
     outputElement,
     current.output,
-    25
+    30
   );
 
 
@@ -3636,13 +3631,13 @@ async function terminalAnimation(){
   await typeText(
     outputElement2,
     next.output,
-    25
+    30
   );
 
 
   setTimeout(
     terminalAnimation,
-    3500
+    4800
   );
 
 }
